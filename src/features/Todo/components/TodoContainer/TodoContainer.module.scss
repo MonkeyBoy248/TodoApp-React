@@ -8,4 +8,13 @@
     border-radius: 10px;
     padding: 0.75rem 1rem;
   }
+
+  &__header {
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    font-family: MontserratBold, Arial, Helvetica, sans-serif;
+    margin-bottom: 0.75rem;
+  }
 }
