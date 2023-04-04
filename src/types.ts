@@ -4,3 +4,8 @@ export interface Todo {
   text: string;
   done: boolean;
 }
+
+export interface Statistics {
+  done: number;
+  active: number;
+}
