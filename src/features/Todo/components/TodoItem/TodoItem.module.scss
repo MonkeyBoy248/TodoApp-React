@@ -6,6 +6,19 @@
   outline: 2px solid var(--todo-item-border);
   margin-bottom: 0.625rem;
 
+  &:has(input[type='checkbox']:checked) {
+    outline-color: rgb(0, 0, 0, .3);
+
+    input[type='text'] {
+      text-decoration: line-through;
+    }
+  }
+
+  &__doneCheckbox {
+    width: 20px;
+    height: 20px;
+  }
+
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -13,18 +26,27 @@
   &__leftColumn {
     display: flex;
     gap: 1.5rem;
+    align-items: center;
   }
 
-  &__title {
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
+  &__input {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+    border: none;
+    background-color: transparent;
+    padding: 0.25rem;
+
+    &_title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    &_text {
+      font-weight: 500;
+      font-size: 0.825rem;
+    }
   }
 
-  &__text {
-    font-weight: 500;
-    font-size: 0.825rem;
-  }
 
   &__controls {
     display: flex;

@@ -3,7 +3,7 @@ import { AddTodoForm } from '../AddTodoForm/AddTodoForm';
 import { TodoList } from '../TodoList/TodoList';
 import { TodoFooter } from '../TodoFooter/TodoFooter';
 import { useMemo, useState } from 'react';
-import { Statistics, Todo } from '../../../../types';
+import { Statistics, Todo, TodoTextInfo } from '../../../../types';
 import { TextButton } from '../../../../components/TextButton/TextButton';
 
 export type Filter = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_DONE';
@@ -68,6 +68,40 @@ export const TodoContainer = () => {
     setFilterTerm(term);
   };
 
+  const deleteTodo = (id: string) => {
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  };
+
+  const editTodo = (id: string, key: keyof TodoTextInfo, value: string) => {
+    setTodos((todos) => {
+      return todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            [key]: value,
+          };
+        }
+
+        return todo;
+      });
+    });
+  };
+
+  const toggleTodoStatus = (id: string) => {
+    setTodos((todos) => {
+      return todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            done: !todo.done,
+          };
+        }
+
+        return todo;
+      });
+    });
+  };
+
   return (
     <main className={styles.todo__container}>
       <div className={styles.todo__mainContent}>
@@ -85,7 +119,12 @@ export const TodoContainer = () => {
             />
           </div>
         </header>
-        <TodoList todos={visibleTodos} />
+        <TodoList
+          todos={visibleTodos}
+          onCheck={toggleTodoStatus}
+          onDelete={deleteTodo}
+          onEdit={editTodo}
+        />
         <TodoFooter statistics={statistics} onClick={getFilterTerm} />
       </div>
     </main>
