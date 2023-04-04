@@ -130,11 +130,13 @@ export const TodoContainer = () => {
           <h2 className={styles.todo__title}>Todos</h2>
           <AddTodoForm onSubmit={addNewTodo}></AddTodoForm>
           <div className={styles.todo__controls}>
-            <TextButton
-              text={'Mark all done'}
-              backgroundColor={'var(--mark-all-button)'}
-              onClick={markAllTodosDone}
-            />
+            {todos.length > 0 && doneTodosAmount !== todos.length && (
+              <TextButton
+                text={'Mark all done'}
+                backgroundColor={'var(--mark-all-button)'}
+                onClick={markAllTodosDone}
+              />
+            )}
             {doneTodosAmount > 0 && (
               <TextButton
                 text={`Remove all done (${doneTodosAmount})`}
