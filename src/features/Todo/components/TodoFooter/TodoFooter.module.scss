@@ -1,0 +1,18 @@
+.todoFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__counter {
+    margin-bottom: 0.5rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
