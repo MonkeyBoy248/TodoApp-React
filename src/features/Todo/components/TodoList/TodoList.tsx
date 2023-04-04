@@ -9,9 +9,13 @@ interface TodoListProps {
 export const TodoList = ({ todos }: TodoListProps) => {
   return (
     <ul className={styles.todoList}>
-      {todos.map((todo) => {
-        return <TodoItem todo={todo} key={todo.id} />;
-      })}
+      {todos.length > 0 ? (
+        todos.map((todo) => {
+          return <TodoItem todo={todo} key={todo.id} />;
+        })
+      ) : (
+        <p>The list is empty!</p>
+      )}
     </ul>
   );
 };
