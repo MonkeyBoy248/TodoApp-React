@@ -2,4 +2,11 @@
   border-radius: 8px;
   border: none;
   padding: 0.5rem;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
 }
