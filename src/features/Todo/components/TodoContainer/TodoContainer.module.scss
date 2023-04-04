@@ -17,4 +17,10 @@
     font-family: MontserratBold, Arial, Helvetica, sans-serif;
     margin-bottom: 0.75rem;
   }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
 }
