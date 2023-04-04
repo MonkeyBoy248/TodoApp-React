@@ -1,6 +1,36 @@
 .addTodoForm {
   padding: 0;
-  margin: 0;
+  margin-bottom: 0.75rem;
+  display: none;
+
+  &_shown {
+    display: block;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  &__showFormButton {
+    background-color: transparent;
+    border-radius: 50%;
+    border-width: 1px;
+    font-size: 1.2rem;
+    opacity: 0.7;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   &__fields {
     margin: 0;
@@ -8,11 +38,6 @@
     border: none;
   }
 
-  &__legend {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.625rem;
-  }
 
   &__fieldsList {
     list-style-type: none;
@@ -27,7 +52,7 @@
     margin-bottom: 0.45rem;
   }
 
-  &__input {
+  &__textInput {
     max-width: 300px;
     width: 100%;
     font-size: 1rem;
