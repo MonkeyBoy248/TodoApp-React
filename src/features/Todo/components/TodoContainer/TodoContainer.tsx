@@ -49,7 +49,6 @@ export const TodoContainer = () => {
       return acc;
     }, 0);
   }, [todos]);
-  console.log(doneTodosAmount);
   const statistics = useMemo(() => {
     return todos.reduce(
       (previousValue: Statistics, currentValue) => {
@@ -114,12 +113,22 @@ export const TodoContainer = () => {
     );
   };
 
+  const addNewTodo = (textInfo: TodoTextInfo) => {
+    const newTodo: Todo = {
+      ...textInfo,
+      id: crypto.randomUUID(),
+      done: false,
+    };
+
+    setTodos((todos) => [...todos, newTodo]);
+  };
+
   return (
     <main className={styles.todo__container}>
       <div className={styles.todo__mainContent}>
         <header className={styles.todo__header}>
           <h2 className={styles.todo__title}>Todos</h2>
-          <AddTodoForm></AddTodoForm>
+          <AddTodoForm onSubmit={addNewTodo}></AddTodoForm>
           <div className={styles.todo__controls}>
             <TextButton
               text={'Mark all done'}

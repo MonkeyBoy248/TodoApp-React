@@ -2,9 +2,27 @@ import { useState } from 'react';
 import { TextButton } from '../../../../components/TextButton/TextButton';
 import clsx from 'clsx';
 import styles from './AddTodoForm.module.scss';
+import { TodoTextInfo } from '../../../../types';
 
-export const AddTodoForm = () => {
+interface AddTodoFormProps {
+  onSubmit: (todoTextInfo: TodoTextInfo) => void;
+}
+
+export const AddTodoForm = ({ onSubmit }: AddTodoFormProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [todoTextInfo, setTodoTextInfo] = useState<TodoTextInfo>({
+    title: '',
+    text: '',
+  });
+
+  const getTodoTextInfo = (key: keyof TodoTextInfo, value: string) => {
+    setTodoTextInfo((info) => {
+      return {
+        ...info,
+        [key]: value,
+      };
+    });
+  };
 
   return (
     <>
@@ -23,7 +41,8 @@ export const AddTodoForm = () => {
         })}
         onSubmit={(e) => {
           e.preventDefault();
-          console.log('Submitted');
+          onSubmit(todoTextInfo);
+          setTodoTextInfo({ text: '', title: '' });
         }}
       >
         <fieldset className={styles.addTodoForm__fields}>
@@ -41,9 +60,11 @@ export const AddTodoForm = () => {
                 name='title'
                 id='addTodoForm__titleInput'
                 placeholder='Enter a todo title'
+                value={todoTextInfo.title}
                 required={true}
                 minLength={3}
                 maxLength={30}
+                onChange={(e) => getTodoTextInfo('title', e.target.value)}
               />
             </li>
             <li className={styles.addTodoForm__fieldWrapper}>
@@ -58,9 +79,11 @@ export const AddTodoForm = () => {
                 type='text'
                 name='title'
                 id='addTodoForm__textInput'
+                value={todoTextInfo.text}
                 placeholder='Enter a todo text'
                 minLength={3}
                 maxLength={50}
+                onChange={(e) => getTodoTextInfo('text', e.target.value)}
               />
             </li>
           </ul>

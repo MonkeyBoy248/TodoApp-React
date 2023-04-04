@@ -35,7 +35,7 @@ export const TodoItem = ({ todo, onEdit, onDelete, onCheck }: TodoItemProps) => 
             value={todo.title}
             minLength={3}
             maxLength={30}
-            onChange={(e) => onEdit(todo.id, 'title', e.currentTarget.value)}
+            onChange={(e) => onEdit(todo.id, 'title', e.target.value)}
           />
           <input
             className={clsx(styles.todoItem__input, styles.todoItem__input_text)}
@@ -45,7 +45,7 @@ export const TodoItem = ({ todo, onEdit, onDelete, onCheck }: TodoItemProps) => 
             value={todo.text}
             minLength={3}
             maxLength={50}
-            onChange={(e) => onEdit(todo.id, 'text', e.currentTarget.value)}
+            onChange={(e) => onEdit(todo.id, 'text', e.target.value)}
           />
         </div>
       </div>
