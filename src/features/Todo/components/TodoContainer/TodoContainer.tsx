@@ -25,7 +25,7 @@ export const TodoContainer = () => {
     {
       id: 'jkhu',
       title: 'Todo app',
-      done: true,
+      done: false,
       text: 'Finish the project',
     },
   ]);
@@ -102,6 +102,18 @@ export const TodoContainer = () => {
     });
   };
 
+  const removeAllDoneTodos = () => {
+    setTodos((todos) => todos.filter((todo) => !todo.done));
+  };
+
+  const markAllTodosDone = () => {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        return { ...todo, done: true };
+      })
+    );
+  };
+
   return (
     <main className={styles.todo__container}>
       <div className={styles.todo__mainContent}>
@@ -112,11 +124,15 @@ export const TodoContainer = () => {
             <TextButton
               text={'Mark all done'}
               backgroundColor={'var(--mark-all-button)'}
+              onClick={markAllTodosDone}
             />
-            <TextButton
-              text={`Remove all done (${doneTodosAmount})`}
-              backgroundColor={'var(--delete-button)'}
-            />
+            {doneTodosAmount > 0 && (
+              <TextButton
+                text={`Remove all done (${doneTodosAmount})`}
+                backgroundColor={'var(--delete-button)'}
+                onClick={removeAllDoneTodos}
+              />
+            )}
           </div>
         </header>
         <TodoList
