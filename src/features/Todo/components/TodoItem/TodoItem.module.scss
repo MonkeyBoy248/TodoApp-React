@@ -1,0 +1,33 @@
+.todoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  outline: 2px solid var(--todo-item-corder);
+  margin-bottom: 0.625rem;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &__leftColumn {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 0.825rem;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 1rem;
+  }
+}
