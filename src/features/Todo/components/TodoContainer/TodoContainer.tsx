@@ -8,16 +8,17 @@ import { TodoStore, useTodoStore } from '../../../../store/todosStore';
 
 export type Filter = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_DONE';
 
-const {
-  todos,
-  toggleStatus,
-  editTodo,
-  removeAllDone,
-  removeTodo,
-  markAllDone,
-  filterTerm
-} = useTodoStore<TodoStore>();
 export const TodoContainer = () => {
+  const {
+    todos,
+    toggleStatus,
+    editTodo,
+    removeAllDone,
+    removeTodo,
+    markAllDone,
+    filterTerm,
+  } = useTodoStore<TodoStore>();
+
   const visibleTodos = useMemo(() => {
     switch (filterTerm) {
       case 'SHOW_ACTIVE':

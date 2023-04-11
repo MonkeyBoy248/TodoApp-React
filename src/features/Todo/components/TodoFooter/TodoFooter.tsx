@@ -11,7 +11,6 @@ interface Controls {
 }
 
 export const TodoFooter = () => {
-  const filterTerm = useTodoStore((state) => state.filterTerm);
   const setTerm = useTodoStore((state) => state.setTerm);
   const todos = useTodoStore((state) => state.todos);
   const controls: Controls[] = [
