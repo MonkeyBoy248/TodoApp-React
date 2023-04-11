@@ -1,4 +1,4 @@
-import { append, removeItem, updateItem, create } from 'simple-store'
+import { append, updateItem, removeItem, create } from 'zuxs-store'
 import { Todo } from '../types';
 
 export interface TodoStore {
@@ -15,29 +15,18 @@ export interface TodoStore {
 
 export type Filter = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_DONE';
 
+const todosKey = 'todos';
+
+const getTodosFromLocalStorage = (): Todo[] => {
+  const todos = JSON.parse(localStorage.getItem(todosKey) ?? 'null');
+
+  return todos ?? [];
+}
+
 export const useTodoStore = create<TodoStore>((set, get) => {
   return {
     filterTerm: 'SHOW_ALL',
-    todos: [
-      {
-        id: 'kglt',
-        title: 'Contest',
-        done: false,
-        text: 'Finish context',
-      },
-      {
-        id: 'klko',
-        title: 'State manger',
-        done: false,
-        text: 'Create state manager',
-      },
-      {
-        id: 'jkhu',
-        title: 'Todo app',
-        done: false,
-        text: 'Finish the project',
-      },
-    ],
+    todos: getTodosFromLocalStorage(),
     addTodo: (item) => {
       set({ todos: append([item]) });
     },
