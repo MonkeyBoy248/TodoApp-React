@@ -1,19 +1,18 @@
 import { TextButton } from '../../../../components/TextButton/TextButton';
-import { Statistics, Todo } from '../../../../types';
+import { useTodoStore } from '../../../../store/todosStore';
+import { Statistics } from '../../../../types';
 import { Filter } from '../TodoContainer/TodoContainer';
 import styles from './TodoFooter.module.scss';
-
-interface TodoFooterProps {
-  statistics: Statistics;
-  onClick: (term: Filter) => void;
-}
+import { useMemo } from 'react';
 
 interface Controls {
   text: string;
   term: Filter;
 }
 
-export const TodoFooter = ({ statistics, onClick }: TodoFooterProps) => {
+export const TodoFooter = () => {
+  const setTerm = useTodoStore((state) => state.setTerm);
+  const todos = useTodoStore((state) => state.todos);
   const controls: Controls[] = [
     {
       text: 'All',
@@ -28,6 +27,19 @@ export const TodoFooter = ({ statistics, onClick }: TodoFooterProps) => {
       term: 'SHOW_ACTIVE',
     },
   ];
+  const statistics = useMemo(() => {
+    return todos.reduce(
+      (previousValue: Statistics, currentValue) => {
+        currentValue.done ? previousValue.done++ : previousValue.active++;
+
+        return previousValue;
+      },
+      {
+        done: 0,
+        active: 0,
+      }
+    );
+  }, [todos]);
 
   const getStatisticsText = (counter: number, type: keyof Statistics) => {
     const isSingle = counter === 1;
@@ -54,7 +66,7 @@ export const TodoFooter = ({ statistics, onClick }: TodoFooterProps) => {
               text={button.text}
               type={'button'}
               key={button.text}
-              onClick={() => onClick(button.term)}
+              onClick={() => setTerm(button.term)}
             />
           );
         })}

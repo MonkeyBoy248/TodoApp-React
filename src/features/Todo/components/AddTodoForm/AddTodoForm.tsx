@@ -3,17 +3,15 @@ import { TextButton } from '../../../../components/TextButton/TextButton';
 import clsx from 'clsx';
 import styles from './AddTodoForm.module.scss';
 import { TodoTextInfo } from '../../../../types';
+import { useTodoStore } from '../../../../store/todosStore';
 
-interface AddTodoFormProps {
-  onSubmit: (todoTextInfo: TodoTextInfo) => void;
-}
-
-export const AddTodoForm = ({ onSubmit }: AddTodoFormProps) => {
+export const AddTodoForm = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [todoTextInfo, setTodoTextInfo] = useState<TodoTextInfo>({
     title: '',
     text: '',
   });
+  const addTodo = useTodoStore((state) => state.addTodo)
 
   const getTodoTextInfo = (key: keyof TodoTextInfo, value: string) => {
     setTodoTextInfo((info) => {
@@ -41,9 +39,12 @@ export const AddTodoForm = ({ onSubmit }: AddTodoFormProps) => {
         })}
         onSubmit={(e) => {
           e.preventDefault();
-          onSubmit(todoTextInfo);
-          setTodoTextInfo({ text: '', title: '' });
-        }}
+          addTodo({
+            id: crypto.randomUUID(),
+            text: todoTextInfo.text,
+            title: todoTextInfo.title,
+            done: false,
+          })}}
       >
         <fieldset className={styles.addTodoForm__fields}>
           <ul className={styles.addTodoForm__fieldsList}>
