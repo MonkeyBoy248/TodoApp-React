@@ -11,7 +11,7 @@ export const AddTodoForm = () => {
     title: '',
     text: '',
   });
-  const addTodo = useTodoStore((state) => state.addTodo)
+  const addTodo = useTodoStore((state) => state.addTodo);
 
   const getTodoTextInfo = (key: keyof TodoTextInfo, value: string) => {
     setTodoTextInfo((info) => {
@@ -44,7 +44,9 @@ export const AddTodoForm = () => {
             text: todoTextInfo.text,
             title: todoTextInfo.title,
             done: false,
-          })}}
+          });
+          setTodoTextInfo({ text: '', title: '' });
+        }}
       >
         <fieldset className={styles.addTodoForm__fields}>
           <ul className={styles.addTodoForm__fieldsList}>
